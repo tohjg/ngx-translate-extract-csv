@@ -6,6 +6,7 @@ var fs = require('fs');
 var csv = require("fast-csv");
 
 var basepath = process.cwd();
+var encoding = 'utf8';
 
 var usageMessage = `
 Merge JSON files created with ngx-translate-extract to a single CSV file and vice versa.
@@ -60,6 +61,7 @@ function sanitizeCsvText(string) {
   return string
     .replace(/"/g, '""')
 }
+
 
 // Main Execution goes here
 
@@ -177,7 +179,7 @@ if (params.hasOwnProperty("r")) {
   }
   console.log(header);
   if (typeof destinationPath === "string") {
-    outputFile.write(header+"\n");
+    outputFile.write(header+"\n", encoding);
   }
   let terms = Object.keys(tableObj);
   for (let term of terms) {
@@ -189,7 +191,7 @@ if (params.hasOwnProperty("r")) {
       }
       console.log(line);
       if (typeof destinationPath === "string") {
-        outputFile.write(line+"\n");
+        outputFile.write(line+"\n", encoding);
       }
   }
 
