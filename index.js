@@ -128,7 +128,7 @@ if (params.hasOwnProperty("r")) {
           flags: 'w'
         });
         console.log(`Creating: ${filepath}`);
-        outputFile.write(JSON.stringify(depthedAllLangsObject[lang],null,'\t'));
+        outputFile.write(JSON.stringify(content,null,'\t'), encoding);
         outputFile.end();
       }
       console.log('Done...');
