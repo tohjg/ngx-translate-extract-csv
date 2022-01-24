@@ -56,9 +56,9 @@ function injectLangObject(lang, langObj, tableObj) {
   }
 }
 
-function sanitizeCsvText(string) {
-  if (!string) return string;
-  return string
+function sanitizeCsvText(csvString) {
+  if (csvString === "undefined") return "";
+  return csvString
     .replace(/"/g, '""')
 }
 
