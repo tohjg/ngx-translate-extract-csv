@@ -109,15 +109,15 @@ if (params.hasOwnProperty("r")) {
         for (let key in data) {
           let dataval=data[key];
           if (key!=="termID") {
-            allLangsObject[`${key}.${termId}`] = dataval;
+            if (!allLangsObject[`${key}`]) allLangsObject[`${key}`] = {};
+              allLangsObject[`${key}`][`${termId}`] = dataval
           }
         }
     })
     .on("end", function(){
-      //Give depth to the flat-object. 1st level of properties of the object are each language
-      let depthedAllLangsObject = dot.object(allLangsObject);
-      for (let lang in depthedAllLangsObject) {
+      for (let lang in allLangsObject) {
         //write language specific object to language file
+        const content = allLangsObject[lang];
         let filepath = `${basepath}/${destinationPath}/${lang}.json`;
         var outputFile = fs.createWriteStream(filepath, {
           flags: 'w'
