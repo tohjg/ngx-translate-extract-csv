@@ -55,6 +55,11 @@ function injectLangObject(lang, langObj, tableObj) {
   }
 }
 
+function sanitizeCsvText(string) {
+  if (!string) return string;
+  return string
+    .replace(/"/g, '""')
+}
 
 // Main Execution goes here
 
@@ -176,9 +181,11 @@ if (params.hasOwnProperty("r")) {
   }
   let terms = Object.keys(tableObj);
   for (let term of terms) {
-      let line = `"${term}"`;
+      let sanitizedLine = sanitizeCsvText(term);
+      let line = `"${sanitizedLine}"`;
       for (let lang of languages) {
-          line += `${delimiter}"${tableObj[term][lang]}"`;
+        sanitizedLine = sanitizeCsvText(tableObj[term][lang])
+        line += `${delimiter}"${sanitizedLine}"`;
       }
       console.log(line);
       if (typeof destinationPath === "string") {
