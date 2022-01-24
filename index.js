@@ -110,7 +110,12 @@ if (params.hasOwnProperty("r")) {
           let dataval=data[key];
           if (key!=="termID") {
             if (!allLangsObject[`${key}`]) allLangsObject[`${key}`] = {};
+
+            if (dataval !== "") {
               allLangsObject[`${key}`][`${termId}`] = dataval
+            } else {
+              allLangsObject[`${key}`][`${termId}`] = null
+            }
           }
         }
     })
@@ -200,8 +205,3 @@ if (params.hasOwnProperty("r")) {
   }
 
 }
-
-
-
-
-
